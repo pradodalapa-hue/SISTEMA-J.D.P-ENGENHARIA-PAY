@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DONY PAY - ENGENHARIA SOBERANA</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root { --ouro: #FFD700; --preto: #000000; --verde: #00FF00; }
+        body { background: var(--preto); color: var(--ouro); font-family: 'Courier New', monospace; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; }
+        .terminal { border: 5px solid var(--ouro); padding: 25px; border-radius: 20px; width: 320px; background: #111; box-shadow: 0 0 40px rgba(255, 215, 0, 0.3); }
+        .display-valor { font-size: 50px; font-weight: bold; margin: 20px 0; color: var(--verde); text-shadow: 0 0 10px var(--verde); }
+        .btn-radar { background: var(--ouro); color: var(--preto); border: none; width: 100%; padding: 25px; font-size: 20px; font-weight: bold; border-radius: 12px; cursor: pointer; text-transform: uppercase; margin-bottom: 15px; }
+        #qr-box { display: none; background: #fff; padding: 15px; margin-top: 20px; border-radius: 10px; }
+        #status-log { font-size: 14px; color: var(--verde); height: 50px; margin-top: 15px; border-top: 1px solid #333; padding-top: 10px; }
+    </style>
+</head>
+<body>
+<div class="terminal">
+    <h2 style="margin:0;">DONY BURGUER'S</h2>
+    <div class="display-valor" id="venda-valor">R$ 1,00</div>
+    <button class="btn-radar" onclick="ativarMaquina()">ATIVAR RADAR NFC</button>
+    <div id="qr-box">
+        <img id="qr-code" src="" alt="QR Code Pix" style="width: 200px;">
+        <p style="color:#000; font-weight:bold; font-size:12px;">LEIA PARA PAGAR</p>
+    </div>
+    <div id="status-log">AGUARDANDO COMANDO...</div>
+</div>
+<script>
+    const log = document.getElementById('status-log');
+    const qrBox = document.getElementById('qr-box');
+    const chavePix = "Pradolindalva4@gmail.com";
+    async function ativarMaquina() {
+        log.innerText = "RADAR ATIVO... APROXIME O CARTÃO";
+        if ('NDEFReader' in window) {
+            try {
+                const ndef = new NDEFReader();
+                await ndef.scan();
+                ndef.onreading = ({ serialNumber }) => {
+                    log.innerText = "CARTÃO IDENTIFICADO!\nID: " + serialNumber;
+                    falar("Cartão identificado. Gerando Pix para pagamento.");
+                    gerarPix();
+                };
+            } catch (error) { log.innerText = "ERRO: ACESSE VIA HTTPS"; }
+        } else { setTimeout(gerarPix, 2000); }
+    }
+    function gerarPix() {
+        const url = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=00020126330014br.gov.bcb.pix0124${chavePix}52040000530398654041.005802BR5912JOSE%20DIVINO6006MANAUS62070503***6304`;
+        document.getElementById('qr-code').src = url;
+        qrBox.style.display = "block";
+        log.innerText = "PIX GERADO COM SUCESSO!";
+        falar("Pix gerado no valor de um real.");
+    }
+    function falar(t) { const m = new SpeechSynthesisUtterance(t); m.lang='pt-BR'; window.speechSynthesis.speak(m); }
+</script>
+</body>
+</html>
+ 

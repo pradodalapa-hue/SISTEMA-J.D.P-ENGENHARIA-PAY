@@ -1,0 +1,36 @@
+{
+<<<<<<< HEAD
+    "name": "COMANDO CENTRAL JDP",
+    "short_name": "MAGNATA_JDP",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#050506",
+    "theme_color": "#bf953f",
+    "icons": [
+        {
+            "src": "icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
+=======
+  "name": "DONY BURGUERS PAY",
+  "short_name": "DonyPay",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#FFD700",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
+>>>>>>> 8cecff4 (Soberania Ativada: NFC e PWA Dony Burguers)
