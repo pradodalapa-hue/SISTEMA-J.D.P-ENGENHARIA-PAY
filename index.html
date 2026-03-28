@@ -29,7 +29,7 @@
 </div>
 
 <script>
-    const mp = new MercadoPago('APP_USR-9edf862b-ef4e-4531-a3c7-eb8b3f4cbaeb');
+    const mp = new MercadoPago('APP_USR-2926a3cc-27f2-49fb-be7b-277852f5afd5');
 
     async function atualizarBotao() {
         const valor = document.getElementById('valor-input').value;
@@ -41,7 +41,7 @@
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer APP_USR-5426389781379371-122921-4ef22693727f45fb24b8f0f066e77ec9-754289488"
+                    "Authorization": "Bearer APP_USR-2671749910685862-122921-b5b8088c9f6832d1f722c1ed95dd475f-3100673895"
                 },
                 body: JSON.stringify({
                     items: [{ title: "Venda Dony Burguer's", quantity: 1, unit_price: parseFloat(valor), currency_id: "BRL" }],
